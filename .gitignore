@@ -260,3 +260,6 @@ SFML/*
 *.pdb
 *.ilk
 *.exe
+*.sln
+*.gitattributes
+*.VC
