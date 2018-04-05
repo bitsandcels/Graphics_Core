@@ -250,3 +250,13 @@ ModelManifest.xml
 SFML/*
 
 *.dll
+
+##########################
+### IGNORE EXTRA FILES ###
+##########################
+*.tlog
+*.obj
+*.idb
+*.pdb
+*.ilk
+*.exe
