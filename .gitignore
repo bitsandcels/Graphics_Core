@@ -240,8 +240,3 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
-
-#### IGNORE SFML FILES
-*/SFML/*
-SFML/*
-*.dll
