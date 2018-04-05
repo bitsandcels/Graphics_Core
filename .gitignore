@@ -263,3 +263,7 @@ SFML/*
 *.sln
 *.gitattributes
 *.VC
+*/Debug/*
+
+Debug/*
+
