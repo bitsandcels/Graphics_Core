@@ -263,7 +263,5 @@ SFML/*
 *.sln
 *.gitattributes
 *.VC
-*/Debug/*
-
-Debug/*
-
+x64/*
+Graphics_Core/x64/*
