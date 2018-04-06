@@ -9,19 +9,23 @@ class AssetHouse
 {
 private:
 	
-	vector<DynamicObject> dynamicObjects;	// Dynamic array of objects that are moveable
-	vector<StaticObject> staticObjects;		// Dynamic array of objects that are not moveable
-	PQueue graphicsQueue;					// Pqueue holds objects in layers, lower layer numbers are rendered first, with higher numbers rendered over top.
+	vector<DynamicObject> dynamicObjects;		// Dynamic array of objects that are moveable
+	vector<DynamicObject>::iterator dynObjIt;	// Iterator for Dynamic Array
+	vector<StaticObject> staticObjects;			// Dynamic array of objects that are not moveable
+	vector<StaticObject>::iterator staObjIt;	// Iterator for Static Array
+	PQueue graphicsQueue;						// Pqueue holds objects in layers, lower layer numbers are rendered first, with higher numbers rendered over top.
 
 	void LoadStaticAssets(Position, int, int, sf::Color, int);			// Creates a temp StaticObject to be loaded into the staticObjects vector
 	void SetDynamicAssets(Position, int, int, sf::Color, int);			// Creates a temp DynamicObject to be loaded into the dynamicObjects vector
+
+	sf::RenderWindow window;
 
 public:
 	AssetHouse();						// Default constructor
 	AssetHouse(int, int, string);		// Constructor that accepts parameters for window X size, window Y size, and window title
 	~AssetHouse();						// default destructor
 
-	sf::RenderWindow window;
+	
 
 	void OrganizePriorityQueue();		// Fills priority queue with all dynamic and static objects
 	
@@ -55,7 +59,9 @@ public:
 	void SetGraphics(GraphicsData, bool);
 
 
-	void Update();						// Primary graphics loop, checks for window close event, calls Render()
+	bool Update();						// Primary graphics loop, checks for window close event, calls Render()
+	bool Update(sf::RenderWindow &);	// Graphics Loop that accepts window reference. Otherwise identical
 	void Render();						// Empties priority queue and calls draw() for each object in queue.
+	void Render(sf::RenderWindow &);	// Render loop that accepts window reference. Otherwise Identical
 
 };

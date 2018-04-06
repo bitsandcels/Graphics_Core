@@ -25,7 +25,7 @@ StaticObject::StaticObject(GraphicsData gData)
 	Visual = gData;
 }
 
-void StaticObject::Transform(int TransformType, float X, float Y=0)
+void StaticObject::Transform(int TransformType, float X, float Y)
 {
 	switch (TransformType)
 	{

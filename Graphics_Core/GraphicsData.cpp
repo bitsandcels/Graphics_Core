@@ -113,6 +113,9 @@ int GraphicsData::GetIntSize()
 GraphicsData::GraphicsData(const GraphicsData& other)
 {
 	position = other.position;
+	size = other.size;
+	numSides = other.numSides;
+	color = other.color;
 	Shape = other.Shape;
 	LayerNum = other.LayerNum;
 }
@@ -120,6 +123,9 @@ GraphicsData::GraphicsData(const GraphicsData& other)
 void GraphicsData::operator =(const GraphicsData& other)
 {
 	position = other.position;
+	size = other.size;
+	numSides = other.numSides;
+	color = other.color;
 	Shape = other.Shape;
 	LayerNum = other.LayerNum;
 }

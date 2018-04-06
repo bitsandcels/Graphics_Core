@@ -22,7 +22,7 @@ public:
 	-	Use X also as angle to rotate shape
 	-	@param Y : Set Y Value (by how much to move/scale along Y-Axis)
 	*/
-	void Transform(int TransformType, float X, float Y=0);
+	void Transform(int TransformType, float X, float Y);
 
 	//Returns Visual.GetShape() to render window
 	sf::CircleShape Render();

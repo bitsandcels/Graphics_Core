@@ -5,6 +5,12 @@ DynamicObject::DynamicObject()
 
 }
 
+DynamicObject::DynamicObject(Position pos, int size, int numSides, sf::Color color, int layerNum)
+{
+	Visual = GraphicsData(pos, size, numSides, color, layerNum);
+}
+
+
 DynamicObject::~DynamicObject()
 {
 

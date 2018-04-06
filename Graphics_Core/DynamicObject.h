@@ -8,6 +8,7 @@ private:
 
 public:
 	DynamicObject();
+	DynamicObject(Position, int, int, sf::Color, int);
 	~DynamicObject();
 
 	/*
