@@ -265,3 +265,4 @@ SFML/*
 *.VC
 x64/*
 Graphics_Core/x64/*
+.vs/Graphics_Core/v14/.suo
