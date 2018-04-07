@@ -170,7 +170,7 @@ bool AssetHouse::Update(sf::RenderWindow & windowRef)
 	}
 	windowRef.clear(sf::Color::Black);
 
-	Render();
+	Render(windowRef);
 
 	windowRef.display();
 	return true;
