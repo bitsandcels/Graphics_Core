@@ -26,6 +26,7 @@ private:
 
 struct DataStructure
 {
+	DataStructure() {};
 	int priority;
 	bool staticObject;
 	DynamicObject dObject;

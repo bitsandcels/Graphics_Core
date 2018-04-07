@@ -5,13 +5,18 @@ class StaticObject
 {
 private:
 	GraphicsData Visual;
+	int objectID;
 
 public:
 	StaticObject();
-	StaticObject(float X, float Y, int size, int numSides, sf::Color color, int layerNum);
-	StaticObject(Position pos, int size, int numSides, sf::Color color, int layerNum);
-	StaticObject(GraphicsData gData);
+	StaticObject(float X, float Y, int size, int numSides, sf::Color color, int layerNum, int ID);
+	StaticObject(Position pos, int size, int numSides, sf::Color color, int layerNum, int ID);
+	StaticObject(GraphicsData gData, int ID);
 	~StaticObject();
+
+	int GetID();		// Get objectID
+
+	void SetColor(sf::Color);		// Set object Color
 
 	/*
 	Update translates member Visual using:

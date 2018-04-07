@@ -2,18 +2,24 @@
 
 DynamicObject::DynamicObject()
 {
-
+	objectID = 0;
 }
 
-DynamicObject::DynamicObject(Position pos, int size, int numSides, sf::Color color, int layerNum)
+DynamicObject::DynamicObject(Position pos, int size, int numSides, sf::Color color, int layerNum, int ID)
 {
 	Visual = GraphicsData(pos, size, numSides, color, layerNum);
+	objectID = ID;
 }
 
 
 DynamicObject::~DynamicObject()
 {
 
+}
+
+int DynamicObject::GetID()
+{
+	return objectID;
 }
 
 void DynamicObject::SetVisual(float X, float Y, int size, int numSides, sf::Color color, int layerNum)
@@ -24,6 +30,11 @@ void DynamicObject::SetVisual(float X, float Y, int size, int numSides, sf::Colo
 void DynamicObject::SetVisual(Position pos, int size, int numSides, sf::Color color, int layerNum)
 {
 	Visual = GraphicsData(pos, size, numSides, color, layerNum);
+}
+
+void DynamicObject::SetColor(sf::Color newColor)
+{
+	Visual.SetColor(newColor);
 }
 
 void DynamicObject::Transform(int TransformType, float X, float Y)

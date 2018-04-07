@@ -15,8 +15,8 @@ private:
 	vector<StaticObject>::iterator staObjIt;	// Iterator for Static Array
 	PQueue graphicsQueue;						// Pqueue holds objects in layers, lower layer numbers are rendered first, with higher numbers rendered over top.
 
-	void LoadStaticAssets(Position, int, int, sf::Color, int);			// Creates a temp StaticObject to be loaded into the staticObjects vector
-	void SetDynamicAssets(Position, int, int, sf::Color, int);			// Creates a temp DynamicObject to be loaded into the dynamicObjects vector
+	void LoadStaticAssets(Position, int, int, sf::Color, int, int);			// Creates a temp StaticObject to be loaded into the staticObjects vector
+	void SetDynamicAssets(Position, int, int, sf::Color, int, int);			// Creates a temp DynamicObject to be loaded into the dynamicObjects vector
 
 	sf::RenderWindow window;
 
@@ -54,10 +54,26 @@ public:
 		-	The lower numbers will be rendered first (bottom layer)
 	*/
 
-	void SetGraphics(float , float , int , int , sf::Color , int , bool);					
-	void SetGraphics(Position, int, int, sf::Color, int, bool);
-	void SetGraphics(GraphicsData, bool);
+	void SetGraphics(float , float , int , int , sf::Color , int , bool, int);					
+	void SetGraphics(Position, int, int, sf::Color, int, bool, int);
+	void SetGraphics(GraphicsData, bool, int);
 
+
+	/*
+	Update translates member Visual using:
+	-	@param TrasnformType : Transform Shape
+	-	0 = MOVE
+	-	1 = ROTATE
+	-	2 = SCALE
+	-	@param X : Set X Value (by how much to move/scale along X-Axis)
+	-	Use X also as angle to rotate shape
+	-	@param Y : Set Y Value (by how much to move/scale along Y-Axis)
+	-	When rotating, use 0 for Y
+	*/
+	void Transform(int transformType, float X, float Y, int ID);
+
+	void RemoveGraphic(int);			// Used to remove an object from the graphics loop
+	void ChangeColor(sf::Color, int);	// Used to change the color of an object
 
 	bool Update();						// Primary graphics loop, checks for window close event, calls Render()
 	bool Update(sf::RenderWindow &);	// Graphics Loop that accepts window reference. Otherwise identical

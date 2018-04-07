@@ -1,15 +1,15 @@
 #include "AssetHouse.h"
 
-void AssetHouse::LoadStaticAssets(Position pos, int size, int numSides, sf::Color color, int layerNum)
+void AssetHouse::LoadStaticAssets(Position pos, int size, int numSides, sf::Color color, int layerNum, int ID)
 {
-	StaticObject tempObj(pos, size, numSides, color, layerNum);
+	StaticObject tempObj(pos, size, numSides, color, layerNum, ID);
 	staObjIt = staticObjects.begin();
 	staticObjects.insert(staObjIt, tempObj);
 }
 
-void AssetHouse::SetDynamicAssets(Position pos, int size, int numSides, sf::Color color, int layerNum)
+void AssetHouse::SetDynamicAssets(Position pos, int size, int numSides, sf::Color color, int layerNum, int ID)
 {
-	DynamicObject tempObj(pos, size, numSides, color, layerNum);
+	DynamicObject tempObj(pos, size, numSides, color, layerNum, ID);
 	dynObjIt = dynamicObjects.begin();
 	dynamicObjects.insert(dynObjIt, tempObj);
 }
@@ -97,42 +97,93 @@ void AssetHouse::Render(sf::RenderWindow & windowRef)
 }
 
 
-void AssetHouse::SetGraphics(float x, float y, int size, int numSides, sf::Color color, int layerNum, bool isStatic)
+void AssetHouse::SetGraphics(float x, float y, int size, int numSides, sf::Color color, int layerNum, bool isStatic, int ID)
 {
 	Position pos(x, y);
 	if (isStatic)
 	{
-		LoadStaticAssets(pos, size, numSides, color, layerNum);
+		LoadStaticAssets(pos, size, numSides, color, layerNum, ID);
 	}
 	else
 	{
-		SetDynamicAssets(pos, size, numSides, color, layerNum);
+		SetDynamicAssets(pos, size, numSides, color, layerNum, ID);
 	}
 }
 
-void AssetHouse::SetGraphics(Position pos, int size, int numSides, sf::Color color, int layerNum, bool isStatic)
+void AssetHouse::SetGraphics(Position pos, int size, int numSides, sf::Color color, int layerNum, bool isStatic, int ID)
 {
 	if (isStatic)
 	{
-		LoadStaticAssets(pos, size, numSides, color, layerNum);
+		LoadStaticAssets(pos, size, numSides, color, layerNum, ID);
 	}
 	else
 	{
-		SetDynamicAssets(pos, size, numSides, color, layerNum);
+		SetDynamicAssets(pos, size, numSides, color, layerNum, ID);
 	}
 }
 
-void AssetHouse::SetGraphics(GraphicsData gData, bool isStatic)
+void AssetHouse::SetGraphics(GraphicsData gData, bool isStatic, int ID)
 {
 	Position pos(gData.GetXPosition(), gData.GetYPosition());
 	
 	if (isStatic)
 	{
-		LoadStaticAssets(pos, gData.GetIntSize(), gData.GetNumSides(), gData.GetColor(), gData.GetLayerNum());
+		LoadStaticAssets(pos, gData.GetIntSize(), gData.GetNumSides(), gData.GetColor(), gData.GetLayerNum(), ID);
 	}
 	else
 	{
-		SetDynamicAssets(pos, gData.GetIntSize(), gData.GetNumSides(), gData.GetColor(), gData.GetLayerNum());
+		SetDynamicAssets(pos, gData.GetIntSize(), gData.GetNumSides(), gData.GetColor(), gData.GetLayerNum(), ID);
+	}
+}
+
+void AssetHouse::Transform(int transformType, float X, float Y, int ID)
+{
+	for (int i = 0; i < dynamicObjects.size(); i++)
+	{
+		if (dynamicObjects[i].GetID() == ID)
+		{
+			dynamicObjects[i].Transform(transformType, X, Y);
+		}
+	}
+}
+
+void AssetHouse::RemoveGraphic(int ID)
+{
+	for (int i = 0; i < dynamicObjects.size(); i++)
+	{
+		if (dynamicObjects[i].GetID() == ID)
+		{
+			dynamicObjects.erase(dynamicObjects.begin() + i);	// Remove object from vector
+			i = dynamicObjects.size();
+		}
+	}
+	for (int i = 0; i < staticObjects.size(); i++)
+	{
+		if (staticObjects[i].GetID() == ID)
+		{
+			staticObjects.erase(staticObjects.begin() + i);		// Remove object from vector
+			i = staticObjects.size();
+		}
+	}
+}
+
+void AssetHouse::ChangeColor(sf::Color newColor, int ID)
+{
+	for (int i = 0; i < dynamicObjects.size(); i++)
+	{
+		if (dynamicObjects[i].GetID() == ID)
+		{
+			dynamicObjects[i].SetColor(newColor);
+			i = dynamicObjects.size();
+		}
+	}
+	for (int i = 0; i < staticObjects.size(); i++)
+	{
+		if (staticObjects[i].GetID() == ID)
+		{
+			staticObjects[i].SetColor(newColor);
+			i = staticObjects.size();
+		}
 	}
 }
 

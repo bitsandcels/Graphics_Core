@@ -144,3 +144,9 @@ void GraphicsData::ScaleShape(float X, float Y)
 {
 	Shape.scale(X, Y);
 }
+
+void GraphicsData::SetColor(sf::Color newColor)
+{
+	Shape.setFillColor(newColor);
+	color = newColor;
+}
