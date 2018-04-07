@@ -149,25 +149,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AssetHouse.cpp" />
-    <ClCompile Include="Button.cpp" />
-    <ClCompile Include="DynamicObject.cpp" />
-    <ClCompile Include="GraphicsData.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Position.cpp" />
-    <ClCompile Include="PQueue.cpp" />
-    <ClCompile Include="StaticObject.cpp" />
-    <ClCompile Include="UI.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="AssetHouse.h" />
-    <ClInclude Include="Button.h" />
-    <ClInclude Include="DynamicObject.h" />
-    <ClInclude Include="GraphicsData.h" />
-    <ClInclude Include="Position.h" />
-    <ClInclude Include="PQueue.h" />
-    <ClInclude Include="StaticObject.h" />
-    <ClInclude Include="UI.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
