@@ -53,6 +53,7 @@ public:
 	void MoveShape(float, float);					//Move shape
 	void RotateShape(float);						//Rotate shape
 	void ScaleShape(float, float);					//Scale shape
+	void SetColor(sf::Color);						//Set Color
 
 	GraphicsData(const GraphicsData&);	//Copy Constructor
 	void operator = (const GraphicsData&);	//Set new GraphicsData to the current GraphicsData

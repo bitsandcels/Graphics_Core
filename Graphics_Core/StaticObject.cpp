@@ -2,7 +2,7 @@
 
 StaticObject::StaticObject()
 {
-
+	objectID = 0;
 }
 
 StaticObject::~StaticObject()
@@ -10,22 +10,35 @@ StaticObject::~StaticObject()
 
 }
 
-StaticObject::StaticObject(float X, float Y, int size, int numSides, sf::Color color, int layerNum)
+int StaticObject::GetID()
+{
+	return objectID;
+}
+
+void StaticObject::SetColor(sf::Color newColor)
+{
+	Visual.SetColor(newColor);
+}
+
+StaticObject::StaticObject(float X, float Y, int size, int numSides, sf::Color color, int layerNum, int ID)
 {
 	Visual = GraphicsData(X, Y, size, numSides, color, layerNum);
+	objectID = ID;
 }
 
-StaticObject::StaticObject(Position pos, int size, int numSides, sf::Color color, int layerNum)
+StaticObject::StaticObject(Position pos, int size, int numSides, sf::Color color, int layerNum, int ID)
 {
 	Visual = GraphicsData(pos, size, numSides, color, layerNum);
+	objectID = ID;
 }
 
-StaticObject::StaticObject(GraphicsData gData)
+StaticObject::StaticObject(GraphicsData gData, int ID)
 {
 	Visual = gData;
+	objectID = ID;
 }
 
-void StaticObject::Transform(int TransformType, float X, float Y=0)
+void StaticObject::Transform(int TransformType, float X, float Y)
 {
 	switch (TransformType)
 	{

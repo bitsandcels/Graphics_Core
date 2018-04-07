@@ -5,10 +5,14 @@ class DynamicObject
 {
 private:
 	GraphicsData Visual;
+	int objectID;
 
 public:
 	DynamicObject();
+	DynamicObject(Position, int, int, sf::Color, int, int);
 	~DynamicObject();
+
+	int GetID();		// Get objectID
 
 	/*
 		SetVisual sets member Visual using:
@@ -28,6 +32,8 @@ public:
 	*/
 	void SetVisual(float X, float Y, int size, int numSides, sf::Color color, int layerNum);
 	void SetVisual(Position pos, int size, int numSides, sf::Color color, int layerNum);
+
+	void SetColor(sf::Color);		// Set object Color
 
 	/*
 		Update translates member Visual using:

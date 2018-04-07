@@ -2,14 +2,14 @@
 
 PQueue::PQueue()
 {
-	queues = new std::queue<DataStructure*>[50];
+	queues = new std::queue<DataStructure>[50];
 	numPriorities = 50;
 	length = 0;
 }
 
 PQueue::PQueue(int size)
 {
-	queues = new std::queue<DataStructure*>[size];
+	queues = new std::queue<DataStructure>[size];
 	numPriorities = size;
 	length = 0;
 }
@@ -24,15 +24,16 @@ int PQueue::GetLength()
 	return length;
 }
 
-bool PQueue::Enqueue(DataStructure * data)
+bool PQueue::Enqueue(DataStructure &data)
 {
-	int priority = data->priority;
+	int priority = data.priority;
 	int startLength = queues[priority].size();
 	queues[priority].push(data);
 	int endLength = queues[priority].size();
 
 	if (endLength > startLength)
 	{
+		length++;
 		return true;
 	}
 	else
@@ -41,7 +42,7 @@ bool PQueue::Enqueue(DataStructure * data)
 	}
 }
 
-bool PQueue::Dequeue(DataStructure * data)
+bool PQueue::Dequeue(DataStructure &data)
 {
 	if (length > 0)
 	{
@@ -57,10 +58,16 @@ bool PQueue::Dequeue(DataStructure * data)
 
 		int startLength = queues[priority].size();
 		data = queues[priority].front();
+		/*data->priority = queues[priority].front()->priority;
+		data->staticObject = queues[priority].front()->staticObject;
+		data->dObject = queues[priority].front()->dObject;
+		data->sObject = queues[priority].front()->sObject;*/
+
 		queues[priority].pop();
 		int endLength = queues[priority].size();
 		if (startLength > endLength)
 		{
+			length--;
 			return true;
 		}
 		else
@@ -77,7 +84,7 @@ bool PQueue::Dequeue(DataStructure * data)
 bool PQueue::MakeEmpty()
 {
 	delete[] queues;
-	queues = new std::queue<DataStructure*>[numPriorities];
+	queues = new std::queue<DataStructure>[numPriorities];
 	length = 0;
 
 	if (length == 0)
@@ -89,3 +96,5 @@ bool PQueue::MakeEmpty()
 		return false;
 	}
 }
+
+
