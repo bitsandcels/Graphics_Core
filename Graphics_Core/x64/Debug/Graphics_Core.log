@@ -1,4 +1,0 @@
-﻿  main.cpp
-c:\users\spong_000\documents\visual studio 2015\_projects\graphics_core\graphics_core\main.cpp(11): warning C4101: 'event': unreferenced local variable
-  Graphics_Core.vcxproj -> C:\Users\spong_000\Documents\Visual Studio 2015\_Projects\Graphics_Core\x64\Debug\Graphics_Core.exe
-  Graphics_Core.vcxproj -> C:\Users\spong_000\Documents\Visual Studio 2015\_Projects\Graphics_Core\x64\Debug\Graphics_Core.pdb (Full PDB)
