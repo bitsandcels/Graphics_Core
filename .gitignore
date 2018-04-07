@@ -266,4 +266,9 @@ SFML/*
 x64/*
 Graphics_Core/x64/*
 .vs/Graphics_Core/v14/.suo
+
 *.db
+
+.vs/Graphics_Core/v14/.suo
+
+Graphics_Core.VC.db
