@@ -272,3 +272,13 @@ Graphics_Core/x64/*
 .vs/Graphics_Core/v14/.suo
 
 Graphics_Core.VC.db
+
+x64/Debug/Graphics_Core.exe
+
+x64/Debug/Graphics_Core.ilk
+
+x64/Debug/Graphics_Core.pdb
+
+*.vcxproj
+
+*.filters
