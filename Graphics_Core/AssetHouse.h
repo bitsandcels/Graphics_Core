@@ -75,9 +75,10 @@ public:
 	void RemoveGraphic(int);			// Used to remove an object from the graphics loop
 	void ChangeColor(sf::Color, int);	// Used to change the color of an object
 
-	bool Update();						// Primary graphics loop, checks for window close event, calls Render()
-	bool Update(sf::RenderWindow &);	// Graphics Loop that accepts window reference. Otherwise identical
+	bool Update(bool clearAndDisplayWnd = true);						// Primary graphics loop, checks for window close event, calls Render()
+	bool Update(sf::RenderWindow &, bool clearAndDisplayWnd = true);	// Graphics Loop that accepts window reference. Otherwise identical
 	void Render();						// Empties priority queue and calls draw() for each object in queue.
 	void Render(sf::RenderWindow &);	// Render loop that accepts window reference. Otherwise Identical
 
+	sf::CircleShape getShapeObj(int ID);
 };

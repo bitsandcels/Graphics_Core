@@ -1,21 +1,37 @@
-//#pragma once
-//
-//#include "UI.h"
-//#include <windows.h>
-//#include <vector>
-//using std::vector;
-//
-//
-//class Button : public UI
-//{
-//public:
-//	Button(SUIInfo info);
-//	~Button();
-//	virtual int Click();
-//	virtual int MouseButtonDown(int button);
-//	virtual int MouseButtonUp(int button);
-//private:
-//	virtual int MouseOver();
-//	virtual int MouseOut();
-//
-//};
+#pragma once
+#include "AssetHouse.h"
+
+class Button
+{
+private:
+	float posX, posY;
+	int size, ID;
+	bool clicked;
+	sf::Color color;
+
+public:
+
+
+	Button() {};										// Default constructor
+	Button(float, float, int, AssetHouse&, int, sf::Color);		// Constructor that accepts parameters 
+	~Button();											// default destructor
+
+														//Accessors
+	float getX();
+	float getY();
+	int getSize();
+	int getID();
+	bool getClicked();
+	sf::Color getColor();
+
+	void Click();
+	void UnClick();
+};
+
+
+
+
+
+
+
+

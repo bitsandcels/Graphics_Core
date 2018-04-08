@@ -70,8 +70,8 @@ void AssetHouse::Render()
 		}
 		else
 		{
-			sf::CircleShape tempShape(tempData.dObject.Render());
-			window.draw(tempShape);
+			//sf::CircleShape tempShape(tempData.dObject.Render());
+			window.draw(tempData.dObject.Render());
 		}
 	}
 
@@ -92,6 +92,24 @@ void AssetHouse::Render(sf::RenderWindow & windowRef)
 		else
 		{
 			windowRef.draw(tempData.dObject.Render());
+		}
+	}
+}
+
+sf::CircleShape AssetHouse::getShapeObj(int ID)
+{
+	for (int i = 0; i < dynamicObjects.size(); i++)
+	{
+		if (dynamicObjects[i].GetID() == ID)
+		{
+			return dynamicObjects[i].Render();
+		}
+	}
+	for (int i = 0; i < staticObjects.size(); i++)
+	{
+		if (staticObjects[i].GetID() == ID)
+		{
+			return staticObjects[i].Render();
 		}
 	}
 }
@@ -187,7 +205,7 @@ void AssetHouse::ChangeColor(sf::Color newColor, int ID)
 	}
 }
 
-bool AssetHouse::Update()
+bool AssetHouse::Update(bool clearAndDisplayWnd)
 {
 	sf::Event event;
 	while (window.pollEvent(event))
@@ -199,15 +217,17 @@ bool AssetHouse::Update()
 			return false;
 		}
 	}
-	window.clear(sf::Color::Black);
+	if(clearAndDisplayWnd == true)
+		window.clear(sf::Color::Black);
 
 	Render();
 
-	window.display();
+	if (clearAndDisplayWnd == true)
+		window.display();
 	return true;
 }
 
-bool AssetHouse::Update(sf::RenderWindow & windowRef)
+bool AssetHouse::Update(sf::RenderWindow & windowRef, bool clearAndDisplayWnd)
 {
 	sf::Event event;
 	while (windowRef.pollEvent(event))
@@ -219,10 +239,12 @@ bool AssetHouse::Update(sf::RenderWindow & windowRef)
 			return false;
 		}
 	}
-	windowRef.clear(sf::Color::Black);
+	if (clearAndDisplayWnd == true)
+		windowRef.clear(sf::Color::Black);
 
 	Render(windowRef);
 
-	windowRef.display();
+	if (clearAndDisplayWnd == true)
+		windowRef.display();
 	return true;
 }
