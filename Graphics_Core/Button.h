@@ -23,6 +23,7 @@ public:
 	int getID();
 	bool getClicked();
 	sf::Color getColor();
+	sf::CircleShape getShape(AssetHouse &buttonShape);
 
 	void Click();
 	void UnClick();

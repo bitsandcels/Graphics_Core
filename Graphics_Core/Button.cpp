@@ -47,6 +47,10 @@ sf::Color Button::getColor()
 	return color;
 }
 
+sf::CircleShape Button::getShape(AssetHouse &buttonShape)
+{
+	return buttonShape.getShapeObj(ID);
+}
 
 void Button::Click()
 {

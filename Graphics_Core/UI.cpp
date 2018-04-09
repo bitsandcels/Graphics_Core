@@ -55,10 +55,7 @@ void CheckEvent(sf::RenderWindow & hwin, AssetHouse & core, Button button[], int
 				for (int i = 0; i < numButtons; ++i)
 				{
 					int buttonId = button[i].getID();
-					//sf::CircleShape shp = core.getShapeObj(buttonId); //get some way to access bounds of SFML shape
-					//sf::Rect<float> bounds = shp.getGlobalBounds();
-					if (event.mouseButton.x > button[i].getX() && event.mouseButton.x < button[i].getX() + button[i].getSize() &&
-						event.mouseButton.y > button[i].getY() && event.mouseButton.y < button[i].getY() + button[i].getSize())
+					if (button[i].getShape(core).getGlobalBounds().contains(hwin.mapPixelToCoords(sf::Mouse::getPosition(hwin))))
 					{
 						button[i].Click();
 						clickedButton = buttonId;

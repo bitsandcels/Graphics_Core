@@ -31,7 +31,7 @@ int main()
 	//sf::CircleShape circleShape(200);
 	//circleShape.setFillColor(sf::Color::Blue);
 
-	graphicsCore.SetGraphics(0.0f, 0.0f, 200, 4, sf::Color::Blue, 1, false, 7);
+	graphicsCore.SetGraphics(0.0f, 0.0f, 200, 4, sf::Color::Magenta, 1, false, 7);
 	graphicsCore.SetGraphics(0.0f, 0.0f, 100, 3, sf::Color::Red, 0, false, 8);
 
 	const int numButtons = 2;
@@ -39,12 +39,6 @@ int main()
 
 	buttons[0] = *new Button(400.0f, 25.0f, 100, graphicsCore, 1, sf::Color::Red);
 	buttons[1] = *new Button(400.0f, 200.0f, 100, graphicsCore, 2, sf::Color::Blue);
-	//buttons[2] = *new Button(400.0f, 175.0f, 50, graphicsCore, 3, sf::Color::Yellow);
-	//buttons[3] = *new Button(400.0f, 275.0f, 50, graphicsCore, 4, sf::Color::Cyan);
-	//buttons[4] = *new Button(400.0f, 400.0f, 50, graphicsCore, 5, sf::Color::Green);
-	//buttons[5] = *new Button(400.0f, 500.0f, 50, graphicsCore, 6, sf::Color::Magenta);
-
-
 
 
 	int loopCount = 0;
@@ -61,7 +55,7 @@ int main()
 			graphicsCore.RemoveGraphic(8);
 		}
 
-		graphicsCore.Transform(1, 0.002, 0, 7);
+		graphicsCore.Transform(1, 0.02, 0, 7);		//Rotate shape at 0.02 with index 7
 
 		CheckEvent(renderWindow, graphicsCore, buttons, numButtons);
 
@@ -73,21 +67,6 @@ int main()
 		renderWindow.display();
 		renderWindow.clear(sf::Color::Black);
 	}
-
-	/*
-	while (graphicsCore.window.isOpen())
-	{
-	while (graphicsCore.window.pollEvent(event))
-	{
-	if (event.type == sf::Event::EventType::Closed)
-	graphicsCore.window.close();
-	}
-
-	graphicsCore.window.clear();
-	graphicsCore.window.draw(circleShape);
-	graphicsCore.window.display();
-	}
-	*/
 
 	return 0;
 }

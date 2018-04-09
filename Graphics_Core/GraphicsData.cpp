@@ -77,7 +77,8 @@ void GraphicsData::SetShape(int size, int numSides, sf::Color color)
 {
 	DetermineShape(size, numSides);
 	Shape.setFillColor(color);
-	Shape.setPosition(sf::Vector2f(position.GetXPos(), position.GetYPos()));
+	Shape.setOrigin(size, size);	
+	Shape.setPosition(position.GetXPos() + Shape.getOrigin().x, position.GetYPos() + Shape.getOrigin().y);
 }
 
 sf::CircleShape GraphicsData::GetShape()
