@@ -1,62 +1,63 @@
-//#include "Button.h"
-//
-//Button::Button(SUIInfo info) 
-//{
-//	UI(info.ID, info.Position, info.Size);
-//}
-//
-//Button::~Button()
-//{
-//}
-//
-//
-//
-//int Button::Click()
-//{
-//	if (!m_Activated || !m_MousedOver)
-//		return 0;
-//	return m_ID;
-//}
-//
-//int Button::MouseButtonDown(int button)
-//{
-//	if (!m_Activated || !m_MousedOver)
-//		return 0;
-//	switch (button)
-//	{
-//	case 0:
-//	{
-//		m_MousePressed = true;
-//		return m_ID;
-//		break;
-//	}
-//	}
-//	return 0;
-//}
-//
-//int Button::MouseButtonUp(int button)
-//{
-//	if (!m_Activated)
-//		return 0;
-//	if (m_MousedOver && m_MousePressed)
-//	{
-//		m_MousePressed = false;
-//		return m_ID;
-//	}
-//	m_MousePressed = false;
-//	return 0;
-//}
-//
-//int Button::MouseOver()
-//{
-//	if (m_Activated)
-//		m_MousedOver = true;
-//	return 0;
-//}
-//
-//int Button::MouseOut()
-//{
-//	if (m_Activated)
-//		m_MousedOver = false;
-//	return 0;
-//}
+#include "Button.h"
+
+Button::Button(float _posX, float _posY, int _size, AssetHouse &buttonShape, int _ID, sf::Color _color)
+{
+	posX = _posX;
+	posY = _posY;
+	size = _size;
+	ID = _ID;
+	clicked = false;
+	color = _color;
+	buttonShape.SetGraphics(_posX, _posY, _size, 4, color, 4, false, _ID);
+	buttonShape.Transform(1, 45, 0, _ID); 
+}
+
+Button::~Button()
+{
+
+}
+
+float Button::getX()
+{
+	return posX;
+}
+
+float Button::getY()
+{
+	return posY;
+}
+
+int Button::getSize()
+{
+	return size;
+}
+
+int Button::getID()
+{
+	return ID;
+}
+
+bool Button::getClicked()
+{
+	return clicked;
+}
+
+sf::Color Button::getColor()
+{
+	return color;
+}
+
+sf::CircleShape Button::getShape(AssetHouse &buttonShape)
+{
+	return buttonShape.getShapeObj(ID);
+}
+
+void Button::Click()
+{
+	clicked = true;
+}
+void Button::UnClick()
+{
+	clicked = false;
+}
+

@@ -78,9 +78,11 @@ float Position::GetYPos()
 
 Position & Position::operator=(const Position & other)
 {
+	x = other.x;
+	y = other.y;
 	Position newPos;
-	newPos.x = other.x;
-	newPos.y = other.y;
+	//newPos.x = other.x;
+	//newPos.y = other.y;
 
-	return newPos;
+	return newPos; //should just remove the return and make a void func?
 }
