@@ -8,8 +8,9 @@ Button::Button(float _posX, float _posY, int _size, AssetHouse &buttonShape, int
 	ID = _ID;
 	clicked = false;
 	color = _color;
-	buttonShape.SetGraphics(_posX, _posY, _size, 4, color, 4, false, _ID);
-	buttonShape.Transform(1, 45, 0, _ID); 
+	buttonShape.SetGraphics(_posX, _posY, _size, 4, color, 4, false, _ID, false);
+	float trashX = 0, trashY = 0;	// CHECK IF NEEDED
+	buttonShape.Transform(1, 45, 0, _ID, trashX, trashY); 
 }
 
 Button::~Button()

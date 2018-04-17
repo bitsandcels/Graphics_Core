@@ -131,9 +131,13 @@ void GraphicsData::operator =(const GraphicsData& other)
 	LayerNum = other.LayerNum;
 }
 
-void GraphicsData::MoveShape(float X, float Y)
+void GraphicsData::MoveShape(float X, float Y, float & newX, float & newY)
 {
 	Shape.move(X, Y);
+	sf::Vector2f newPos(Shape.getPosition());
+	newX = newPos.x;
+	newY = newPos.y;
+	position.SetXYPos(newX, newY);
 }
 
 void GraphicsData::RotateShape(float Angle)
@@ -150,4 +154,9 @@ void GraphicsData::SetColor(sf::Color newColor)
 {
 	Shape.setFillColor(newColor);
 	color = newColor;
+}
+
+void GraphicsData::ChangePosition(float X, float Y)
+{
+	Shape.setPosition(X, Y);
 }
