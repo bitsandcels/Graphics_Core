@@ -14,11 +14,16 @@ void AssetHouse::SetDynamicAssets(Position pos, int size, int numSides, sf::Colo
 	dynamicObjects.insert(dynObjIt, tempObj);
 }
 
+void AssetHouse::SetAsteroid(Position pos, int size, int numSides, sf::Color color, int layerNum, int ID)
+{
+	DynamicObject tempObj(pos, size, numSides, color, layerNum, ID);
+	dynamicObjects.push_back(tempObj);
+}
+
 AssetHouse::AssetHouse()
 {
 	window.setSize(sf::Vector2u(640, 480));
 	window.setTitle("Graphics Core");
-
 }
 
 AssetHouse::AssetHouse(int xSize, int ySize, string windowName)
@@ -52,6 +57,13 @@ void AssetHouse::OrganizePriorityQueue()
 		//tempData->dObject = NULL;
 		tempData.staticObject = true;
 		tempData.priority = staticObjects[i].GetLayerNum();
+		graphicsQueue.Enqueue(tempData);
+	}
+	for (int i = 0; i < asteroids.size(); i++)
+	{
+		tempData.dObject = asteroids[i];
+		tempData.staticObject = false;
+		tempData.priority = asteroids[i].GetLayerNum();
 		graphicsQueue.Enqueue(tempData);
 	}
 }
@@ -96,6 +108,18 @@ void AssetHouse::Render(sf::RenderWindow & windowRef)
 	}
 }
 
+void AssetHouse::ChangePosition(int ID, float X, float Y)
+{
+	for (int i = 0; i < dynamicObjects.size(); i++)
+	{
+		if (dynamicObjects[i].GetID() == ID)
+		{
+			dynamicObjects[i].ChangePosition(X, Y);
+		}
+	}
+	
+}
+
 sf::CircleShape AssetHouse::getShapeObj(int ID)
 {
 	for (int i = 0; i < dynamicObjects.size(); i++)
@@ -115,10 +139,14 @@ sf::CircleShape AssetHouse::getShapeObj(int ID)
 }
 
 
-void AssetHouse::SetGraphics(float x, float y, int size, int numSides, sf::Color color, int layerNum, bool isStatic, int ID)
+void AssetHouse::SetGraphics(float x, float y, int size, int numSides, sf::Color color, int layerNum, bool isStatic, int ID, bool isAster)
 {
 	Position pos(x, y);
-	if (isStatic)
+	if (isAster)
+	{
+		SetAsteroid(pos, size, numSides, color, layerNum, ID);
+	}
+	else if (isStatic)
 	{
 		LoadStaticAssets(pos, size, numSides, color, layerNum, ID);
 	}
@@ -128,9 +156,13 @@ void AssetHouse::SetGraphics(float x, float y, int size, int numSides, sf::Color
 	}
 }
 
-void AssetHouse::SetGraphics(Position pos, int size, int numSides, sf::Color color, int layerNum, bool isStatic, int ID)
+void AssetHouse::SetGraphics(Position pos, int size, int numSides, sf::Color color, int layerNum, bool isStatic, int ID, bool isAster)
 {
-	if (isStatic)
+	if (isAster)
+	{
+		SetAsteroid(pos, size, numSides, color, layerNum, ID);
+	}
+	else if (isStatic)
 	{
 		LoadStaticAssets(pos, size, numSides, color, layerNum, ID);
 	}
@@ -140,11 +172,15 @@ void AssetHouse::SetGraphics(Position pos, int size, int numSides, sf::Color col
 	}
 }
 
-void AssetHouse::SetGraphics(GraphicsData gData, bool isStatic, int ID)
+void AssetHouse::SetGraphics(GraphicsData gData, bool isStatic, int ID, bool isAster)
 {
 	Position pos(gData.GetXPosition(), gData.GetYPosition());
 	
-	if (isStatic)
+	if (isAster)
+	{
+		SetAsteroid(pos, gData.GetIntSize(), gData.GetNumSides(), gData.GetColor(), gData.GetLayerNum(), ID);
+	}
+	else if (isStatic)
 	{
 		LoadStaticAssets(pos, gData.GetIntSize(), gData.GetNumSides(), gData.GetColor(), gData.GetLayerNum(), ID);
 	}
@@ -154,13 +190,13 @@ void AssetHouse::SetGraphics(GraphicsData gData, bool isStatic, int ID)
 	}
 }
 
-void AssetHouse::Transform(int transformType, float X, float Y, int ID)
+void AssetHouse::Transform(int transformType, float X, float Y, int ID, float & newX, float & newY)
 {
 	for (int i = 0; i < dynamicObjects.size(); i++)
 	{
 		if (dynamicObjects[i].GetID() == ID)
 		{
-			dynamicObjects[i].Transform(transformType, X, Y);
+			dynamicObjects[i].Transform(transformType, X, Y, newX, newY);
 		}
 	}
 }

@@ -46,7 +46,7 @@ public:
 		-	@param Y : Set Y Value (by how much to move/scale along Y-Axis)
 			-	When rotating, use 0 for Y
 	*/
-	void Transform(int TransformType, float X, float Y);
+	void Transform(int TransformType, float X, float Y, float & newX, float & newY);
 
 	/*
 		-	Returns Visual.GetShape() to render window
@@ -57,4 +57,6 @@ public:
 		-	Return Layer Number for priority queue
 	*/
 	int GetLayerNum();
+
+	void ChangePosition(float X, float Y);	// Change the absolute position of an object
 };

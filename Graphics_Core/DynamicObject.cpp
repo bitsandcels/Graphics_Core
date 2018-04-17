@@ -37,12 +37,12 @@ void DynamicObject::SetColor(sf::Color newColor)
 	Visual.SetColor(newColor);
 }
 
-void DynamicObject::Transform(int TransformType, float X, float Y)
+void DynamicObject::Transform(int TransformType, float X, float Y, float & newX, float & newY)
 {
 	switch (TransformType)
 	{
 	case 0:		//MOVE OBJECT
-		Visual.MoveShape(X, Y);
+		Visual.MoveShape(X, Y, newX, newY);
 		break;
 
 	case 1:		//ROTATE OBJECT
@@ -66,4 +66,9 @@ sf::CircleShape DynamicObject::Render()
 int DynamicObject::GetLayerNum()
 {
 	return Visual.GetLayerNum();	//Return Shape's layer number
+}
+
+void DynamicObject::ChangePosition(float X, float Y)
+{
+	Visual.ChangePosition(X, Y);
 }

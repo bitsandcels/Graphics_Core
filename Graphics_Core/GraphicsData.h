@@ -50,10 +50,11 @@ public:
 	int GetLayerNum();								//Return layer number
 	int GetNumSides();								//Return number of sides
 	sf::Color GetColor();							//Return color
-	void MoveShape(float, float);					//Move shape
+	void MoveShape(float, float, float&, float&);					//Move shape
 	void RotateShape(float);						//Rotate shape
 	void ScaleShape(float, float);					//Scale shape
 	void SetColor(sf::Color);						//Set Color
+	void ChangePosition(float X, float Y);	// Change the absolute position of an object
 
 	GraphicsData(const GraphicsData&);	//Copy Constructor
 	void operator = (const GraphicsData&);	//Set new GraphicsData to the current GraphicsData
