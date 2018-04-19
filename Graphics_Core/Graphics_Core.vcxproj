@@ -155,6 +155,7 @@
     <ClCompile Include="DynamicObject.cpp" />
     <ClCompile Include="GraphicsData.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Position.cpp" />
     <ClCompile Include="PQueue.cpp" />
     <ClCompile Include="StaticObject.cpp" />
@@ -169,6 +170,7 @@
     <ClInclude Include="Button.h" />
     <ClInclude Include="DynamicObject.h" />
     <ClInclude Include="GraphicsData.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="Position.h" />
     <ClInclude Include="PQueue.h" />
     <ClInclude Include="StaticObject.h" />

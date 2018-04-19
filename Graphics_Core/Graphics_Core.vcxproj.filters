@@ -45,6 +45,9 @@
     <ClCompile Include="Asteroids.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Font Include="arial.ttf">
@@ -53,31 +56,34 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AssetHouse.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Button.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DynamicObject.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GraphicsData.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Position.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PQueue.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="StaticObject.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="UI.h">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Asteroids.h">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DynamicObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Position.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PQueue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StaticObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,11 +1,15 @@
 #pragma once
 #include "GraphicsData.h"
 
+const int MAX_TIME = 1000;
+
 class DynamicObject
 {
 private:
 	GraphicsData Visual;
 	int objectID;
+	bool isDead;
+	int CounterToRender;
 
 public:
 	DynamicObject();
@@ -59,4 +63,8 @@ public:
 	int GetLayerNum();
 
 	void ChangePosition(float X, float Y);	// Change the absolute position of an object
+
+	void SetDeath(bool);	//Set var isAlive based on input bool value
+	void UpdateTimer();
+	bool CanRender();	//Determine if the shape can be rendered. Shape will not render if player shoots it (it's "dead" if true)
 };

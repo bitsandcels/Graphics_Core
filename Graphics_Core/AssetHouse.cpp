@@ -82,7 +82,6 @@ void AssetHouse::Render()
 		}
 		else
 		{
-			//sf::CircleShape tempShape(tempData.dObject.Render());
 			window.draw(tempData.dObject.Render());
 		}
 	}
@@ -115,6 +114,13 @@ void AssetHouse::ChangePosition(int ID, float X, float Y)
 
 sf::CircleShape AssetHouse::getShapeObj(int ID)
 {
+	for (int i = 0; i < asteroids.size(); i++)
+	{
+		if (asteroids[i].GetID() == ID)
+		{
+			return asteroids[i].Render();
+		}
+	}
 	for (int i = 0; i < dynamicObjects.size(); i++)
 	{
 		if (dynamicObjects[i].GetID() == ID)
@@ -203,22 +209,68 @@ void AssetHouse::Transform(int transformType, float X, float Y, int ID, float & 
 
 void AssetHouse::RemoveGraphic(int ID)
 {
-	for (int i = 0; i < dynamicObjects.size(); i++)
+	int size = 0;
+	int place;
+	bool didRemoveElement = false;
+
+	size = asteroids.size();
+	if (size == 0)
+	{
+		return;
+	}
+
+	for (int i = 0; i < size; i++)
+	{
+		if (asteroids[i].GetID() == ID)
+		{
+			place = i;
+			didRemoveElement = true;
+			i = size;
+		}
+	}
+
+	if (didRemoveElement)
+	{
+		std::swap(asteroids[place], asteroids.back());
+		asteroids.pop_back();
+		didRemoveElement = false;
+	}
+	
+
+	size = dynamicObjects.size();
+	for (int i = 0; i < size; i++)
 	{
 		if (dynamicObjects[i].GetID() == ID)
 		{
-			dynamicObjects.erase(dynamicObjects.begin() + i);	// Remove object from vector
-			i = dynamicObjects.size();
+			place = i;
+			didRemoveElement = true;
+			i = size;
 		}
 	}
-	for (int i = 0; i < staticObjects.size(); i++)
+	if (didRemoveElement)
+	{
+		std::swap(dynamicObjects[place], dynamicObjects.back());
+		dynamicObjects.pop_back();
+		didRemoveElement = false;
+	}
+
+	size = staticObjects.size();
+	for (int i = 0; i < size; i++)
 	{
 		if (staticObjects[i].GetID() == ID)
 		{
-			staticObjects.erase(staticObjects.begin() + i);		// Remove object from vector
-			i = staticObjects.size();
+			place = i;
+			didRemoveElement = true;
+			i = size;
 		}
 	}
+	if (didRemoveElement)
+	{
+		std::swap(staticObjects[place], staticObjects.back());
+		staticObjects.pop_back();
+		didRemoveElement = false;
+	}
+
 }
 
 void AssetHouse::ChangeColor(sf::Color newColor, int ID)

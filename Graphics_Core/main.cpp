@@ -1,17 +1,9 @@
 #include <iostream>
-
-#include "AssetHouse.h"
 #include "UI.h"
 #include "Asteroids.h"
 #include <time.h>
 #pragma once
 
-
-
-//ID numbers greater than 1000 reserved for asteroids
-
-void GenerateAsteroids(int playerScore, vector<Asteroid> & asteroids, float playerXPos, float playerYPos, AssetHouse & graphicsCore, int & asteroidID);
-void UpdateAsteroids(vector<Asteroid> &asteroids, AssetHouse & graphicsCore);
 
 int main()
 {
@@ -31,7 +23,7 @@ int main()
 		std::cout << "FAILED LOADING FILE" << std::endl;
 	}
 
-	sf::Text text[6];
+	/*sf::Text text[6];
 
 	text[0].setFont(font);
 	text[0].setString("Change to Red");
@@ -46,7 +38,7 @@ int main()
 	text[2].setPosition(15.0f, 425.0f);
 
 	graphicsCore.SetGraphics(0.0f, 0.0f, 40, 4, sf::Color::Magenta, 1, false, 7, false);
-	graphicsCore.SetGraphics(0.0f, 400.0f, 50, 3, sf::Color::White, 0, false, 8, false);
+	graphicsCore.SetGraphics(0.0f, 400.0f, 50, 3, sf::Color::White, 0, false, 8, false);*/
 
 	
 	
@@ -54,14 +46,15 @@ int main()
 	Creating the first asteroid
 	*/
 	vector<Asteroid> asteroidList;
-	//GenerateAsteroids(playerScore, asteroidList, playerXPos, playerYPos, graphicsCore, asteroidID);
+	GenerateAsteroids(playerScore, asteroidList, playerXPos, playerYPos, graphicsCore, asteroidID);
 
-	const int numButtons = 2;
-	Button buttons[numButtons];
+	//const int numButtons = 2;
+	//Button buttons[numButtons];
 
-	buttons[0] = *new Button(400.0f, 115.0f, 100, graphicsCore, 1, sf::Color::Red);
-	buttons[1] = *new Button(400.0f, 275.0f, 100, graphicsCore, 2, sf::Color::Blue);
+	//buttons[0] = *new Button(400.0f, 115.0f, 100, graphicsCore, 1, sf::Color::Red);
+	//buttons[1] = *new Button(400.0f, 275.0f, 100, graphicsCore, 2, sf::Color::Blue);
 
+	Player player(playerXPos, playerYPos);
 
 	int loopCount = 0;
 	bool loopState = true;
@@ -71,7 +64,7 @@ int main()
 		newX = 0;
 		newY = 0;
 		
-		if (loopCount == 900)
+		/*if (loopCount == 900)
 		{
 			graphicsCore.ChangeColor(sf::Color::Green, 7);
 		}
@@ -79,29 +72,26 @@ int main()
 		if (loopCount == 1800)
 		{
 			graphicsCore.RemoveGraphic(8);
-		}
+		}*/
 		
 		graphicsCore.Transform(0, 0.0, 0.02, 7, newX, newY, false);		//Rotate shape at 0.02 with index 7
 
 		
 		// Update the Asteroids
 		GenerateAsteroids(playerScore, asteroidList, playerXPos, playerYPos, graphicsCore, asteroidID);
-		UpdateAsteroids(asteroidList, graphicsCore);
+		UpdateAsteroids(asteroidList, graphicsCore, player);
 		
-		
-		CheckEvent(renderWindow, graphicsCore, buttons, numButtons);
+		//CheckEvent(renderWindow, graphicsCore, buttons, numButtons);
 
 		loopCount++;
 
 		loopState = graphicsCore.Update(renderWindow, false);
-		renderWindow.draw(text[0]); //render text above button
-		renderWindow.draw(text[1]); //render text above button
-
-		if (loopCount > 1800 && loopCount < 2700)
-		{
-			renderWindow.draw(text[2]);
-		}
+		player.Render(renderWindow);
+		//renderWindow.draw(text[0]); //render text above button
+		//renderWindow.draw(text[1]); //render text above button
 		
+		
+
 		if (loopCount > 1200)
 		{
 			playerScore = 50;
@@ -112,60 +102,4 @@ int main()
 	}
 
 	return 0;
-}
-
-void GenerateAsteroids(int playerScore, vector<Asteroid> & asteroids, float playerXPos, float playerYPos, AssetHouse & graphicsCore, int & asteroidID)
-{
-	float tempX = 0, tempY = 0;
-	if (playerScore == 0 && asteroids.size() == 0)
-	{
-		Asteroid newAsteroid(playerXPos, playerYPos, asteroidID);
-		newAsteroid.GetPos(tempX, tempY);
-		graphicsCore.SetGraphics(tempX, tempY, newAsteroid.GetSize(), 4, sf::Color::White, 3, false, asteroidID, true);
-		asteroidID++;
-		asteroids.push_back(newAsteroid);
-	}
-	if (((playerScore + 10) / 10) > asteroids.size())
-	{
-		Asteroid newAsteroid(playerXPos, playerYPos, asteroidID);
-		newAsteroid.GetPos(tempX, tempY);
-		graphicsCore.SetGraphics(tempX, tempY, newAsteroid.GetSize(), 4, sf::Color::White, 3, false, asteroidID, true);
-		asteroidID++;
-		asteroids.push_back(newAsteroid);
-	}
-}
-
-void UpdateAsteroids(vector<Asteroid> &asteroids, AssetHouse & graphicsCore)
-{
-	float tempXPos = 0, tempYPos = 0, newX = 0, newY = 0;
-	int asteroidID = 0;
-	for (int i = 0; i < asteroids.size(); i++)
-	{
-		asteroids[i].GetTransform(newX, newY);
-		asteroidID = asteroids[i].GetID();
-		graphicsCore.Transform(0, newX, newY, i, tempXPos, tempYPos, true);
-		asteroids[i].UpdatePos(tempXPos, tempYPos);
-
-		if (tempXPos > GLOBAL_X_WIN_SIZE)
-		{
-			graphicsCore.ChangePosition(i, 1, tempYPos);
-			asteroids[i].UpdatePos(1, tempYPos);
-		}
-		else if (tempXPos < 0)
-		{
-			graphicsCore.ChangePosition(i, GLOBAL_X_WIN_SIZE - 1, tempYPos);
-			asteroids[i].UpdatePos(GLOBAL_X_WIN_SIZE - 1, tempYPos);
-		}
-		else if (tempYPos > GLOBAL_Y_WIN_SIZE)
-		{
-			graphicsCore.ChangePosition(i, tempXPos, 1);
-			asteroids[i].UpdatePos(tempXPos, 1);
-		}
-		else if (tempYPos < 0)
-		{
-			graphicsCore.ChangePosition(i, tempXPos, GLOBAL_Y_WIN_SIZE - 1);
-			asteroids[i].UpdatePos(tempXPos, GLOBAL_Y_WIN_SIZE - 1);
-		}
-	}
-	
 }

@@ -1,4 +1,5 @@
 #include "AssetHouse.h"
+#include "Player.h"
 
 class Asteroid
 {
@@ -16,6 +17,10 @@ public:
 	int GetSize();
 	// returns the ID number
 	int GetID();
+	//returns if remove
+	bool GetRemove();
+	//sets remove
+	void SetRemove(bool);
 
 private:
 	float xPos;
@@ -24,6 +29,12 @@ private:
 	float yTrans;
 	int size;
 	int graphicsCoreIDNum;
+	bool Remove;
 
 };
 
+//ID numbers greater than 1000 reserved for asteroids
+void GenerateAsteroids(int playerScore, vector<Asteroid> & asteroids, float playerXPos, float playerYPos, AssetHouse & graphicsCore, int & asteroidID);
+void UpdateAsteroids(vector<Asteroid> &asteroids, AssetHouse & graphicsCore, Player & player);
+void DetectAsteriodCollision(vector<Asteroid> &asteroids, int i, AssetHouse & graphicsCore, Player & player, int asteroidID);
+void RemoveAsteriods(vector<Asteroid> &asteroids, int numToRemove);
