@@ -78,7 +78,7 @@ public:
 	-	@param Y : Set Y Value (by how much to move/scale along Y-Axis)
 	-	When rotating, use 0 for Y
 	*/
-	void Transform(int transformType, float X, float Y, int ID, float & newX, float & newY);
+	void Transform(int transformType, float X, float Y, int ID, float & newX, float & newY, bool isAster);
 
 	void RemoveGraphic(int);			// Used to remove an object from the graphics loop
 	void ChangeColor(sf::Color, int);	// Used to change the color of an object

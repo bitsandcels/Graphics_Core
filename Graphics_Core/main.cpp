@@ -54,7 +54,7 @@ int main()
 	Creating the first asteroid
 	*/
 	vector<Asteroid> asteroidList;
-	GenerateAsteroids(playerScore, asteroidList, playerXPos, playerYPos, graphicsCore, asteroidID);
+	//GenerateAsteroids(playerScore, asteroidList, playerXPos, playerYPos, graphicsCore, asteroidID);
 
 	const int numButtons = 2;
 	Button buttons[numButtons];
@@ -81,7 +81,7 @@ int main()
 			graphicsCore.RemoveGraphic(8);
 		}
 		
-		graphicsCore.Transform(0, 0.0, 0.02, 7, newX, newY);		//Rotate shape at 0.02 with index 7
+		graphicsCore.Transform(0, 0.0, 0.02, 7, newX, newY, false);		//Rotate shape at 0.02 with index 7
 
 		
 		// Update the Asteroids
@@ -143,27 +143,27 @@ void UpdateAsteroids(vector<Asteroid> &asteroids, AssetHouse & graphicsCore)
 	{
 		asteroids[i].GetTransform(newX, newY);
 		asteroidID = asteroids[i].GetID();
-		graphicsCore.Transform(0, newX, newY, asteroidID, tempXPos, tempYPos);
+		graphicsCore.Transform(0, newX, newY, i, tempXPos, tempYPos, true);
 		asteroids[i].UpdatePos(tempXPos, tempYPos);
 
 		if (tempXPos > GLOBAL_X_WIN_SIZE)
 		{
-			graphicsCore.ChangePosition(asteroidID, 1, tempYPos);
+			graphicsCore.ChangePosition(i, 1, tempYPos);
 			asteroids[i].UpdatePos(1, tempYPos);
 		}
 		else if (tempXPos < 0)
 		{
-			graphicsCore.ChangePosition(asteroidID, GLOBAL_X_WIN_SIZE - 1, tempYPos);
+			graphicsCore.ChangePosition(i, GLOBAL_X_WIN_SIZE - 1, tempYPos);
 			asteroids[i].UpdatePos(GLOBAL_X_WIN_SIZE - 1, tempYPos);
 		}
 		else if (tempYPos > GLOBAL_Y_WIN_SIZE)
 		{
-			graphicsCore.ChangePosition(asteroidID, tempXPos, 1);
+			graphicsCore.ChangePosition(i, tempXPos, 1);
 			asteroids[i].UpdatePos(tempXPos, 1);
 		}
 		else if (tempYPos < 0)
 		{
-			graphicsCore.ChangePosition(asteroidID, tempXPos, GLOBAL_Y_WIN_SIZE - 1);
+			graphicsCore.ChangePosition(i, tempXPos, GLOBAL_Y_WIN_SIZE - 1);
 			asteroids[i].UpdatePos(tempXPos, GLOBAL_Y_WIN_SIZE - 1);
 		}
 	}
