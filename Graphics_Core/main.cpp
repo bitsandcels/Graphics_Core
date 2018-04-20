@@ -1,5 +1,5 @@
 #include <iostream>
-#include "UI.h"
+//#include "UI.h"
 #include "Asteroids.h"
 #include <time.h>
 #pragma once
@@ -80,6 +80,7 @@ int main()
 		// Update the Asteroids
 		GenerateAsteroids(playerScore, asteroidList, playerXPos, playerYPos, graphicsCore, asteroidID);
 		UpdateAsteroids(asteroidList, graphicsCore, player);
+		player.Update(renderWindow);
 		
 		//CheckEvent(renderWindow, graphicsCore, buttons, numButtons);
 

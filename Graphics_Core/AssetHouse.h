@@ -2,6 +2,8 @@
 #include <vector>
 #include <string>
 
+#define PI 3.14159265
+
 const int GLOBAL_X_WIN_SIZE = 1200;
 const int GLOBAL_Y_WIN_SIZE = 800;
 
