@@ -1,11 +1,21 @@
 #pragma once
 #include "DynamicObject.h"
+#include "UI.h"
+
+
 
 class Player
 {
 private:
 	DynamicObject PlayerChar;
 	DynamicObject PlayerAmmo;
+
+	bool playerForward, playerRotate;
+	float playerSpeed, playerTorque;
+	float playerDir;
+
+	bool ammoReady;
+	float ammoSpeed, ammoDir, ammoOffset;
 
 public:
 	Player(float x, float y);
@@ -21,6 +31,10 @@ public:
 	- bool false = not dead, true = dead
 	*/
 	void SetDeath(int, bool);
+
+	void playerMove();
+	void playerShoot();
+
 	void Render(sf::RenderWindow & renderWindow);
-	void Update();
+	void Update(sf::RenderWindow & renderWindow);
 };
