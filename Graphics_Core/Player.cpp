@@ -9,7 +9,7 @@ Player::Player(float x, float y)
 
 	playerForward = playerRotate = false;
 	playerSpeed = -0.4f;
-	playerTorque = 0.4f;
+	playerTorque = 0.1f;
 
 	PlayerChar.Transform(2, 1, 2, x, y);
 	playerDir = 90.0f;
@@ -51,24 +51,37 @@ void Player::SetDeath(int VAL, bool isDead)
 	}
 }
 
+bool Player::GetDeath(int VAL)
+{
+	if (VAL == 0)
+	{
+		return PlayerChar.CanRender();
+	}
+	if (VAL == 1)
+	{
+		return PlayerAmmo.CanRender();
+	}
+	return false;
+}
+
 
 
 void Player::playerMove()
 {
 
 	float movex, movey;
-//	PlayerChar.Transform(0, 0, playerSpeed*playerForward, movex, movey);
+	//	PlayerChar.Transform(0, 0, playerSpeed*playerForward, movex, movey);
 
 	if (playerForward)
 	{
-		PlayerChar.Transform(0, (cos(playerDir*PI/180)*playerSpeed), (sin(playerDir*PI / 180)*playerSpeed), movex, movey);
+		PlayerChar.Transform(0, (cos(playerDir*PI / 180)*playerSpeed), (sin(playerDir*PI / 180)*playerSpeed), movex, movey);
 	}
 
-	if (playerRotate) 
+	if (playerRotate)
 	{
 		PlayerChar.Transform(1, playerTorque*playerRotate, 0, movex, movey);
 		playerDir += playerTorque;
-		cout << playerDir << endl;
+		//cout << playerDir << endl;
 	}
 
 	PlayerAmmo.Transform(0, (cos(ammoDir*PI / 180)*ammoSpeed), (sin(ammoDir*PI / 180)*ammoSpeed), movex, movey);
@@ -78,11 +91,11 @@ void Player::playerMove()
 
 	if (PlayerChar.Render().getPosition().x < 0)
 	{
-		PlayerChar.Transform(0, GLOBAL_X_WIN_SIZE-20, 0, movex, movey);
+		PlayerChar.Transform(0, GLOBAL_X_WIN_SIZE - 20, 0, movex, movey);
 	}
 	else if (PlayerChar.Render().getPosition().y < 0)
 	{
-		PlayerChar.Transform(0, 0, GLOBAL_Y_WIN_SIZE-20, movex, movey);
+		PlayerChar.Transform(0, 0, GLOBAL_Y_WIN_SIZE - 20, movex, movey);
 	}
 	else if (PlayerChar.Render().getPosition().x > GLOBAL_X_WIN_SIZE)
 	{
@@ -138,6 +151,9 @@ void Player::Render(sf::RenderWindow & renderWindow)
 
 void Player::Update(sf::RenderWindow & renderWindow)
 {
+	if (PlayerChar.CanRender()) //don't take player character input if dead
+		return;
+
 	sf::Event event;
 	//When there is an Event
 	while (renderWindow.pollEvent(event))
@@ -161,10 +177,10 @@ void Player::Update(sf::RenderWindow & renderWindow)
 				playerRotate = true;
 				playerTorque = -1 * (abs(playerTorque));
 			}
-			else if (event.key.code == sf::Keyboard::S)
+			/*else if (event.key.code == sf::Keyboard::S)
 			{
 
-			}
+			}*/
 			else if (event.key.code == sf::Keyboard::D)
 			{
 				playerRotate = true;
@@ -173,25 +189,24 @@ void Player::Update(sf::RenderWindow & renderWindow)
 			}
 			else if (event.key.code == sf::Keyboard::W)
 			{
-
 				playerForward = true;
 			}
 			break;
 
 		case sf::Event::KeyReleased:
-			if (event.key.code == sf::Keyboard::Space)
+			/*if (event.key.code == sf::Keyboard::Space)
 			{
 
-			}
-			else if (event.key.code == sf::Keyboard::A)
+			}*/
+			if (event.key.code == sf::Keyboard::A)
 			{
 				playerRotate = false;
 
 			}
-			else if (event.key.code == sf::Keyboard::S)
+			/*else if (event.key.code == sf::Keyboard::S)
 			{
 
-			}
+			}*/
 			else if (event.key.code == sf::Keyboard::D)
 			{
 				playerRotate = false;
@@ -199,7 +214,6 @@ void Player::Update(sf::RenderWindow & renderWindow)
 			}
 			else if (event.key.code == sf::Keyboard::W)
 			{
-
 				playerForward = false;
 			}
 			break;

@@ -31,6 +31,7 @@ public:
 	- bool false = not dead, true = dead
 	*/
 	void SetDeath(int, bool);
+	bool GetDeath(int);
 
 	void playerMove();
 	void playerShoot();

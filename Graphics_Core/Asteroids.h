@@ -35,6 +35,6 @@ private:
 
 //ID numbers greater than 1000 reserved for asteroids
 void GenerateAsteroids(int playerScore, vector<Asteroid> & asteroids, float playerXPos, float playerYPos, AssetHouse & graphicsCore, int & asteroidID);
-void UpdateAsteroids(vector<Asteroid> &asteroids, AssetHouse & graphicsCore, Player & player);
-void DetectAsteriodCollision(vector<Asteroid> &asteroids, int i, AssetHouse & graphicsCore, Player & player, int asteroidID);
+void UpdateAsteroids(vector<Asteroid> &asteroids, AssetHouse & graphicsCore, Player & player, int& playerScore);
+void DetectAsteriodCollision(vector<Asteroid> &asteroids, int i, AssetHouse & graphicsCore, Player & player, int asteroidID, int& playerScore);
 void RemoveAsteriods(vector<Asteroid> &asteroids, int numToRemove);

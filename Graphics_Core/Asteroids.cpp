@@ -12,14 +12,14 @@ Asteroid::Asteroid(float& playerXPos, float& playerYPos, int ID)
 		// Top Asteroid
 		xPos = rand() % GLOBAL_X_WIN_SIZE;
 		yPos = 0;
-		
+
 	}
 	else if (top == 0 && left == 1)
 	{
 		// Bottom Asteroid
 		xPos = rand() % GLOBAL_X_WIN_SIZE;
 		yPos = GLOBAL_Y_WIN_SIZE;
-		
+
 	}
 	else if (top == 1 && left == 0)
 	{
@@ -115,7 +115,7 @@ void GenerateAsteroids(int playerScore, vector<Asteroid> & asteroids, float play
 	}
 }
 
-void UpdateAsteroids(vector<Asteroid> &asteroids, AssetHouse & graphicsCore, Player & player) 
+void UpdateAsteroids(vector<Asteroid> &asteroids, AssetHouse & graphicsCore, Player & player, int& playerScore)
 {
 	float tempXPos = 0, tempYPos = 0, newX = 0, newY = 0;
 	int asteroidID = 0;
@@ -148,7 +148,7 @@ void UpdateAsteroids(vector<Asteroid> &asteroids, AssetHouse & graphicsCore, Pla
 			asteroids[i].UpdatePos(tempXPos, GLOBAL_Y_WIN_SIZE - 1);
 		}
 
-		DetectAsteriodCollision(asteroids, i, graphicsCore, player, asteroidID);
+		DetectAsteriodCollision(asteroids, i, graphicsCore, player, asteroidID, playerScore);
 		if (asteroids[i].GetRemove() == true)
 		{
 			//asteroids[i] = asteroids.back();
@@ -160,7 +160,7 @@ void UpdateAsteroids(vector<Asteroid> &asteroids, AssetHouse & graphicsCore, Pla
 	//RemoveAsteriods(asteroids, numAsterPushedBack);
 }
 
-void DetectAsteriodCollision(vector<Asteroid> &asteroids,int i, AssetHouse & graphicsCore, Player & player, int asteroidID)
+void DetectAsteriodCollision(vector<Asteroid> &asteroids, int i, AssetHouse & graphicsCore, Player & player, int asteroidID, int& playerScore)
 {
 	//Check if there is a collision between the player ship and asteriod
 	if (graphicsCore.getShapeObj(asteroidID).getGlobalBounds().intersects(player.ReturnPlayerShape().getGlobalBounds()))
@@ -172,7 +172,10 @@ void DetectAsteriodCollision(vector<Asteroid> &asteroids,int i, AssetHouse & gra
 	{
 		asteroids[i].SetRemove(true);
 		graphicsCore.RemoveGraphic(asteroidID);
+		if (!player.GetDeath(1)) //if bullets is alive before collisions increment score
+			playerScore += 10;
 		player.SetDeath(1, true);
+
 	}
 }
 
